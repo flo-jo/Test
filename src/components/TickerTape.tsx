@@ -74,7 +74,7 @@ export const TickerTape: React.FC<TickerTapeProps> = ({ onSelectItem, isDark = f
       className={`border-b text-xs select-none transition-colors overflow-hidden relative ${
         isDark
           ? 'bg-[#131722] border-[#2a2e39] text-[#d1d4dc]'
-          : 'bg-gray-50 border-gray-100 text-gray-700'
+          : 'bg-white border-gray-100 text-gray-700'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 h-9 flex items-center justify-between">

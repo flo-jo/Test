@@ -40,13 +40,13 @@ export default function App() {
   const [currentRegion, setCurrentRegion] = useState<string>('United States');
   const [activeNav, setActiveNav] = useState<string>('Markets');
 
-  // Pro Dark / Light Mode Toggle
+  // Pro Dark / Light Mode Toggle (defaults to clean white background)
   const [isDark, setIsDark] = useState<boolean>(() => {
     try {
       const saved = localStorage.getItem('tv_theme');
-      return saved ? saved === 'dark' : true; // Default to sleek Pro Dark
+      return saved ? saved === 'dark' : false; // Default to clean white theme
     } catch {
-      return true;
+      return false;
     }
   });
 
@@ -138,7 +138,7 @@ export default function App() {
   return (
     <div
       className={`min-h-screen font-sans antialiased transition-colors flex flex-col justify-between selection:bg-blue-600 selection:text-white ${
-        isDark ? 'bg-[#131722] text-[#d1d4dc]' : 'bg-[#f8fafd] text-gray-900'
+        isDark ? 'bg-[#131722] text-[#d1d4dc]' : 'bg-white text-gray-900'
       }`}
     >
       {/* Top Pro Streaming Ticker Tape */}
