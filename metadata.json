@@ -1,0 +1,6 @@
+{
+  "name": "Markets",
+  "description": "Interactive global markets dashboard featuring real-time tracking for US & World stocks, Indices, Crypto, Futures, Forex, Bonds, ETFs, and economic indicators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
