@@ -7,6 +7,7 @@ interface HeroSectionProps {
   onToggleRegionDropdown: () => void;
   currentRegion: string;
   isRegionDropdownOpen: boolean;
+  isDark?: boolean;
 }
 
 const CATEGORIES: MarketCategory[] = [
@@ -26,21 +27,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onSelectCategory,
   onToggleRegionDropdown,
   currentRegion,
-  isRegionDropdownOpen
+  isRegionDropdownOpen,
+  isDark = false
 }) => {
   return (
-    <section className="text-center mb-12 md:mb-16" data-purpose="hero-section">
+    <section className="text-center mb-10 md:mb-14" data-purpose="hero-section">
       {/* Hero Title with Chevron Dropdown Trigger */}
-      <div className="relative inline-block mb-8">
+      <div className="relative inline-block mb-6 md:mb-8">
         <h1
           id="hero-markets-title"
           onClick={onToggleRegionDropdown}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 flex items-center justify-center gap-2 md:gap-3 cursor-pointer group select-none hover:text-blue-600 transition-colors"
+          className={`text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight flex items-center justify-center gap-2 md:gap-3 cursor-pointer group select-none transition-colors ${
+            isDark
+              ? 'text-white hover:text-blue-400'
+              : 'text-gray-900 hover:text-blue-600'
+          }`}
         >
           <span>{currentRegion === 'United States' ? 'Markets, everywhere' : `Markets, ${currentRegion}`}</span>
           <svg
-            className={`w-8 h-8 md:w-10 md:h-10 text-gray-900 group-hover:text-blue-600 transition-all duration-200 ${
-              isRegionDropdownOpen ? 'rotate-180 text-blue-600' : ''
+            className={`w-7 h-7 md:w-9 md:h-9 transition-all duration-200 ${
+              isRegionDropdownOpen
+                ? 'rotate-180 text-blue-500'
+                : isDark
+                ? 'text-white group-hover:text-blue-400'
+                : 'text-gray-900 group-hover:text-blue-600'
             }`}
             fill="none"
             stroke="currentColor"
@@ -52,7 +62,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* Category Filter Pills */}
-      <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-4 text-sm font-medium text-gray-500">
+      <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3.5 text-sm font-medium">
         {CATEGORIES.map((cat) => {
           const isSelected = selectedCategory === cat;
           return (
@@ -60,9 +70,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               key={cat}
               id={`category-pill-${cat.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => onSelectCategory(cat)}
-              className={`px-4 py-2 rounded-full transition-all duration-150 cursor-pointer text-sm font-medium whitespace-nowrap ${
+              className={`px-4 py-2 rounded-full transition-all duration-150 cursor-pointer text-xs sm:text-sm font-medium whitespace-nowrap ${
                 isSelected
-                  ? 'bg-gray-100 text-gray-900 font-semibold shadow-2xs'
+                  ? isDark
+                    ? 'bg-[#2a2e39] text-white font-bold ring-1 ring-[#2962ff]'
+                    : 'bg-gray-100 text-gray-900 font-bold shadow-2xs'
+                  : isDark
+                  ? 'text-[#787b86] hover:text-white hover:bg-[#1e222d]'
                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >

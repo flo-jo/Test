@@ -1,6 +1,6 @@
 {
   "name": "Markets",
-  "description": "Interactive global markets dashboard featuring real-time tracking for US & World stocks, Indices, Crypto, Futures, Forex, Bonds, ETFs, and economic indicators.",
+  "description": "Professional TradingView-style global markets terminal featuring live streaming tickers, multi-indicator candlestick charting (EMA, RSI, BB, MACD), market breadth & Fear/Greed index, stock screeners, breaking AI news feeds, level-2 order book depth, and simulated paper execution.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

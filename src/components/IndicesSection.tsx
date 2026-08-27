@@ -7,13 +7,15 @@ interface IndicesSectionProps {
   selectedIndexId: string;
   onSelectIndex: (id: string) => void;
   onViewAllIndices: () => void;
+  isDark?: boolean;
 }
 
 export const IndicesSection: React.FC<IndicesSectionProps> = ({
   indices,
   selectedIndexId,
   onSelectIndex,
-  onViewAllIndices
+  onViewAllIndices,
+  isDark = false
 }) => {
   return (
     <section data-purpose="indices-section" className="mb-10">
@@ -23,10 +25,20 @@ export const IndicesSection: React.FC<IndicesSectionProps> = ({
         onClick={onViewAllIndices}
         className="flex items-center justify-between mb-6 group cursor-pointer w-max select-none"
       >
-        <h2 className="text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors flex items-center gap-1">
+        <h2
+          className={`text-3xl font-bold tracking-tight transition-colors flex items-center gap-1 ${
+            isDark
+              ? 'text-white group-hover:text-blue-400'
+              : 'text-gray-900 group-hover:text-blue-600'
+          }`}
+        >
           <span>Indices</span>
           <svg
-            className="w-6 h-6 text-gray-900 group-hover:text-blue-600 transition-colors"
+            className={`w-6 h-6 transition-colors ${
+              isDark
+                ? 'text-white group-hover:text-blue-400'
+                : 'text-gray-900 group-hover:text-blue-600'
+            }`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -49,7 +61,11 @@ export const IndicesSection: React.FC<IndicesSectionProps> = ({
               onClick={() => onSelectIndex(index.id)}
               className={`rounded-2xl p-4 flex items-center justify-between transition-all duration-200 cursor-pointer ${
                 isSelected
-                  ? 'bg-gray-100 hover:bg-gray-200 ring-2 ring-blue-500/20 shadow-xs'
+                  ? isDark
+                    ? 'bg-[#1e222d] ring-2 ring-blue-500/40 border border-blue-500/50 shadow-md'
+                    : 'bg-gray-100 ring-2 ring-blue-500/20 shadow-xs'
+                  : isDark
+                  ? 'bg-[#1e222d]/60 hover:bg-[#1e222d] border border-[#2a2e39]'
                   : 'bg-white hover:bg-gray-50 border border-gray-100 hover:border-gray-200 shadow-2xs'
               }`}
               data-purpose="index-card"
@@ -61,17 +77,17 @@ export const IndicesSection: React.FC<IndicesSectionProps> = ({
                   {index.badgeNumber}
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900 flex items-center gap-2">
-                    <span>{index.name}</span>
-                    <span className="text-xs text-gray-400 font-normal">{index.symbol}</span>
+                  <div className="font-semibold flex items-center gap-2">
+                    <span className={isDark ? 'text-white' : 'text-gray-900'}>{index.name}</span>
+                    <span className="text-xs text-gray-400 font-mono font-normal">{index.symbol}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs mt-0.5">
-                    <span className="font-medium text-gray-700">
+                    <span className={`font-mono font-medium ${isDark ? 'text-[#d1d4dc]' : 'text-gray-700'}`}>
                       {index.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                     </span>
                     <span
-                      className={`inline-flex items-center font-medium ${
-                        isPositive ? 'text-emerald-600' : 'text-rose-600'
+                      className={`inline-flex items-center font-mono font-bold ${
+                        isPositive ? 'text-emerald-500' : 'text-rose-500'
                       }`}
                     >
                       {isPositive ? '+' : ''}
@@ -81,15 +97,19 @@ export const IndicesSection: React.FC<IndicesSectionProps> = ({
                 </div>
               </div>
 
-              {/* Sparkline mini indicator */}
+              {/* Day High and Chevron */}
               <div className="flex items-center gap-3">
                 <div className="text-right hidden sm:block">
-                  <div className="text-[11px] text-gray-400">Day High</div>
-                  <div className="text-xs font-medium text-gray-600">{index.high.toLocaleString()}</div>
+                  <div className="text-[10px] text-gray-400">Day High</div>
+                  <div className="text-xs font-mono font-medium text-emerald-500">{index.high.toLocaleString()}</div>
                 </div>
                 <div
                   className={`p-1.5 rounded-lg ${
-                    isSelected ? 'bg-white text-blue-600' : 'text-gray-400 hover:text-gray-600'
+                    isSelected
+                      ? isDark
+                        ? 'bg-[#2a2e39] text-blue-400'
+                        : 'bg-white text-blue-600'
+                      : 'text-gray-400'
                   }`}
                 >
                   <ChevronRight className="w-4 h-4" />
